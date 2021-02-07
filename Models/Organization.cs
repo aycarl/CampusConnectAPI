@@ -14,10 +14,13 @@ namespace CampusConnectAPI.Models
 				[BsonRepresentation(BsonType.ObjectId)]
 				public string Id { get; set; }
 
-				[BsonElement("Name")]
+				[BsonElement("name")]
 				public string Name { get; set; }
 
-				[BsonElement("Description")]
+				[BsonElement("nickname")]
+				public string Nickname { get; set; }
+
+				[BsonElement("description")]
 				public string Description { get; set; }
 		}
 }

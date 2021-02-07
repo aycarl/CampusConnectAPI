@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CampusConnectAPI.Controllers
 {
-		[Route("api/[controller]")]
+		[Route("[controller]")]
 		[ApiController]
 		public class OrganizationsController: ControllerBase
 		{
@@ -20,6 +20,7 @@ namespace CampusConnectAPI.Controllers
 						_organizationsService = organizationsService;
 				}
 
+				
 				[HttpGet]
 				public ActionResult<List<Organization>> Get() =>
 						_organizationsService.Get();
@@ -37,6 +38,43 @@ namespace CampusConnectAPI.Controllers
 						return organization;
 				}
 
+				[HttpPost]
+				public ActionResult<Organization> Create(Organization organization)
+				{
+						_organizationsService.Create(organization);
+
+						return CreatedAtRoute("GetOrganization", new { id = organization.Id.ToString(), organization });
+				}
+
+				[HttpPut("{id:length(24)}")]
+				public IActionResult Update(string id, Organization organizationIn)
+				{
+						var organization = _organizationsService.Get(id);
+
+						if(organization == null)
+						{
+								return NotFound();
+						}
+
+						_organizationsService.Update(id, organizationIn);
+
+						return NoContent();
+				}
+
+				[HttpDelete("{id:length(24)}")]
+				public IActionResult Delete(string id)
+				{
+						var organization = _organizationsService.Get(id);
+
+						if (organization == null)
+						{
+								return NotFound();
+						}
+
+						_organizationsService.Remove(id);
+
+						return NoContent();
+				}
 
 		}
 }

@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 using CampusConnectAPI.Models;
 using Microsoft.Extensions.Options;
-
 using CampusConnectAPI.Services;
 
 namespace CampusConnectAPI
